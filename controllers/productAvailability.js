@@ -35,8 +35,7 @@ module.exports.productAvailabilityController = async (req, res) => {
       "text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8,application/signed-exchange;v=b3;q=0.9",
   });
 
-  await page.goto(url);
-  await page.waitForSelector(selector);
+  await page.goto(url, { waitUntil: "networkidle0" });
   const matchedElements = await page.$$(selector);
   console.log("Number of Matched Elements", matchedElements.length);
   const matchedElementInnerTexts = await Promise.all(
